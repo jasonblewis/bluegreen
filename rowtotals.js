@@ -18,14 +18,14 @@ var data = [
 var total = {};
 
 data.forEach(function(row){
-    if (total[row[l1groupcol]] === undefined) {
+    if (total[row[l1groupcol]] === undefined) { // check level 1 property is defined
         total[row[l1groupcol]] = {};
     }
-    if (total[row[l1groupcol]][row[l2groupcol]] === undefined) {
+    if (total[row[l1groupcol]][row[l2groupcol]] === undefined) { // check level2 array is defined
         total[row[l1groupcol]][row[l2groupcol]] = [];
     }
     sumcols.forEach(function(col){
-        if (total[row[l1groupcol]][row[l2groupcol]][col] === undefined) {
+        if (total[row[l1groupcol]][row[l2groupcol]][col] === undefined) { // check element of l2 array is defined
             total[row[l1groupcol]][row[l2groupcol]][col] = row[col];
         } else {
             total[row[l1groupcol]][row[l2groupcol]][col] = total[row[l1groupcol]][row[l2groupcol]][col] + row[col];
