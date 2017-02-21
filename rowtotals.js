@@ -15,28 +15,27 @@ var data = [
     ["N","S",81,21,33,74,84,54,34,55,22],
 ];
 
-var total = {
-    GrandTotal: []};
+var total = {};
 
-sumcols.forEach(function(col){
-   total.GrandTotal[col] = 0; 
-});
-
-
-data.forEach(function(row,rownum){
-    sumcols.forEach(function(col,index){
-        total.GrandTotal[col] = total.GrandTotal[col] + row[col];
-        if (total[row[l2groupcol]] === undefined) {
-            total[row[l2groupcol]] = [];
-            total[row[l2groupcol]][col] = row[col]; 
+data.forEach(function(row){
+    if (total[row[l1groupcol]] === undefined) {
+        total[row[l1groupcol]] = {};
+    }
+    if (total[row[l1groupcol]][row[l2groupcol]] === undefined) {
+        total[row[l1groupcol]][row[l2groupcol]] = [];
+    }
+    sumcols.forEach(function(col){
+        if (total[row[l1groupcol]][row[l2groupcol]][col] === undefined) {
+            total[row[l1groupcol]][row[l2groupcol]][col] = row[col];
         } else {
-            total[row[l2groupcol]][col] = total[row[l2groupcol]][col] + row[col]; // sum S and P into seperate subtotals
+            total[row[l1groupcol]][row[l2groupcol]][col] = total[row[l1groupcol]][row[l2groupcol]][col] + row[col];
+            
         }
     });
+    
 });
-console.log("s total:", total["S"]);
-console.log("p total:", total["P"]);
-console.log("total: ", total.GrandTotal);
+
+console.log(total);
 
 
 
