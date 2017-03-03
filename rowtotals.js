@@ -36,14 +36,10 @@ data.forEach(function(row){
     
 });
 
-
-
 console.log("N.P: ",total["N"]["P"]);
 console.log("N.S: ",total["N"]["S"]);
 console.log("Y.P: ",total["Y"]["P"]);
 console.log("Y.S: ",total["Y"]["S"]);
-
-
 
 $(document).ready(function() {
     $('#example').DataTable( {
@@ -57,6 +53,7 @@ $(document).ready(function() {
         data: data,
         columns: [
             { title: "Brand" },
+            { title: "Customer<br>Code" },
             { title: "S/P" },
             { title: "1/2016" },
             { title: "2/2016" },
@@ -67,7 +64,13 @@ $(document).ready(function() {
             { title: "7/2016" },
             { title: "8/2016" },
             { title: "9/2016" },
-        ]
+        ],
+        drawCallback: function( settings ) {
+            var api  = this.api();
+            var rows = api.rows( {page:'all'} ).nodes();
+            var previous_group = null;
+
+        },
     } );
 } );
 
