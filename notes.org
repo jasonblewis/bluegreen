@@ -1,0 +1,103 @@
+* bluegreen report
+  data structure:
+  total object
+
+| property    |           | month 1 | month 2 | month 3 |
+|-------------+-----------+---------+---------+---------|
+| Y           | Sales     |         |         |         |
+| Y           | Purchases |         |         |         |
+| N           | Sales     |         |         |         |
+| N           | Purchases |         |         |         |
+| Grand Total | Sales     |         |         |         |
+| Grand Total | Purchases |         |         |         |
+
+
+
+var total = new Object();
+  total.sales = new Object();
+  total.sales['2015-01'] = 100;
+  total.sales['2015-02'] = 200;
+  total.sales['2015-03'] = 300;
+  total.sales['2015-04'] = 500;
+  total.purchases = new Object();
+  total.purchases['2015-01'] = 110;
+  total.purchases['2015-02'] = 220;
+  total.purchases['2015-03'] = 330;
+  total.purchases['2015-04'] = 540;
+
+  total.Y = new Object();
+  total.Y.sales = new Object();
+  total.Y.sales['2015-01'] = 100;
+  total.Y.sales['2015-02'] = 200;
+  total.Y.sales['2015-03'] = 300;
+  total.Y.sales['2015-04'] = 500;
+  total.Y.purchases = new Object();
+  total.Y.purchases['2015-01'] = 110;
+  total.Y.purchases['2015-02'] = 220;
+  total.Y.purchases['2015-03'] = 330;
+  total.Y.purchases['2015-04'] = 540;
+
+  total.N.sales = new Object();
+  total.N.sales['2015-01'] = 100;
+  total.N.sales['2015-02'] = 200;
+  total.N.sales['2015-03'] = 300;
+  total.N.sales['2015-04'] = 500;
+  total.N.purchases = new Object();
+  total.N.purchases['2015-01'] = 110;
+  total.N.purchases['2015-02'] = 220;
+  total.N.purchases['2015-03'] = 330;
+  total.N.purchases['2015-04'] = 540;
+  
+
+creating properties if they don't already exist.
+http://stackoverflow.com/questions/17643965/automatically-create-object-if-undefined
+
+but this doesn't work with datatables.
+
+#+BEGIN_SRC javascript
+Object.prototype.getOrCreate = function (prop) {
+    if (this[prop] === undefined) {
+        this[prop] = {};
+    }
+    return this[prop];
+};
+
+var obj = {};
+
+obj.getOrCreate("foo").getOrCreate("bar").val = 1;
+
+var total = new Object();
+  total.getOrCreate("sales")['2015-01'] = 100;
+  total.sales['2015-02'] = 200;
+  total.sales['2015-03'] = 300;
+  total.sales['2015-04'] = 500;
+  total.purchases = new Object();
+  total.purchases['2015-01'] = 110;
+  total.purchases['2015-02'] = 220;
+  total.purchases['2015-03'] = 330;
+  total.purchases['2015-04'] = 540;
+
+  total.Y = new Object();
+  total.Y.sales = new Object();
+  total.Y.sales['2015-01'] = 100;
+  total.Y.sales['2015-02'] = 200;
+  total.Y.sales['2015-03'] = 300;
+  total.Y.sales['2015-04'] = 500;
+  total.Y.purchases = new Object();
+  total.Y.purchases['2015-01'] = 110;
+  total.Y.purchases['2015-02'] = 220;
+  total.Y.purchases['2015-03'] = 330;
+  total.Y.purchases['2015-04'] = 540;
+
+  total.N.sales = new Object();
+  total.N.sales['2015-01'] = 100;
+  total.N.sales['2015-02'] = 200;
+  total.N.sales['2015-03'] = 300;
+  total.N.sales['2015-04'] = 500;
+  total.N.purchases = new Object();
+  total.N.purchases['2015-01'] = 110;
+  total.N.purchases['2015-02'] = 220;
+  total.N.purchases['2015-03'] = 330;
+  total.N.purchases['2015-04'] = 540;
+
+#+END_SRC
